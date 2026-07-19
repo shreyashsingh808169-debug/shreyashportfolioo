@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyash Singh - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --radius-lg: 1.25rem;
+      --radius-xl: 1.75rem;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --color-bg: #0a0f1f;
+      --color-text: #eef2ff;
+      --color-text-muted: #c7d2fe;
+      --color-text-faint: #9ca8cf;
+      --color-border: rgba(255,255,255,0.18);
+      --shadow-md: 0 10px 30px rgba(0,0,0,0.24);
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(124,58,237,0.30), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(56,189,248,0.24), transparent 26%),
+        radial-gradient(circle at 50% 85%, rgba(251,113,133,0.22), transparent 24%),
+        linear-gradient(135deg, #070b16 0%, #0c1328 45%, #0a0f1f 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .glass {
+      background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.05));
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(18px) saturate(1.25);
+      -webkit-backdrop-filter: blur(18px) saturate(1.25);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-dot {
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      box-shadow: 0 0 18px rgba(255,255,255,0.65);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(125, 211, 252, 0.75);
+      background: rgba(125, 211, 252, 0.08);
+      backdrop-filter: blur(4px);
+      transition: width 0.2s ease, height 0.2s ease, transform 0.12s ease, background 0.2s ease;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.18);
+    }
+
+    .cursor-ring.active {
+      width: 54px;
+      height: 54px;
+      background: rgba(124, 58, 237, 0.12);
+      border-color: rgba(196, 181, 253, 0.85);
+    }
+
+    header {
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-shell {
+      border-radius: var(--radius-xl);
+      padding: 0.9rem 1.1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(124,58,237,0.9), rgba(56,189,248,0.85));
+      font-family: var(--font-display);
+      font-weight: 800;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: var(--font-display);
+    }
+
+    .brand-text span {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      color: var(--color-text-muted);
+      transition: all var(--transition);
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    section {
+      padding: clamp(3rem, 6vw, 6rem) 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-card,
+    .photo-card,
+    .section-card,
+    .skill-box,
+    .project-card {
+      border-radius: var(--radius-xl);
+    }
+
+    .hero-card {
+      padding: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: var(--color-text-muted);
+      font-size: var(--text-xs);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+    }
+
+    #home h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff 0%, #c4b5fd 35%, #7dd3fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-card p,
+    .section-head p,
+    .section-card p,
+    .project-card p,
+    .skill-box p {
+      color: var(--color-text-muted);
+    }
+
+    .hero-highlights,
+    .tag-row,
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .hero-highlights span,
+    .tag {
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: var(--text-sm);
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-top: 1.4rem;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0.9rem 1.2rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: transform var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #0ea5e9);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .photo-card {
+      padding: 1rem;
+      width: min(360px, 100%);
+      margin-inline: auto;
+    }
+
+    .photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.1rem;
+  display: block;
+}
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .section-card {
+      padding: clamp(1.3rem, 3vw, 2rem);
+    }
+
+    .about-grid,
+    .projects-grid,
+    .skills-grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+
+    .info-item span {
+      color: var(--color-text-faint);
+    }
+
+    .skill-box {
+      padding: 1.4rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .skill-box h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .skill-box p {
+      margin-bottom: 1rem;
+    }
+
+    .progress-wrap {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .progress-item span {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.35rem;
+      font-size: var(--text-sm);
+      color: #eef2ff;
+    }
+
+    .bar {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #7c3aed, #38bdf8);
+    }
+
+    .project-card {
+      padding: 1.2rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 1rem;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(124,58,237,0.24), rgba(56,189,248,0.18));
+    }
+
+    .project-status {
+      padding: 0.38rem 0.7rem;
+      border-radius: 999px;
+      font-size: var(--text-xs);
+      background: rgba(34,197,94,0.14);
+    }
+
+    .socials a {
+      min-height: 46px;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    footer {
+      padding: 0 0 2rem;
+      color: var(--color-text-faint);
+      text-align: center;
+    }
+
+    @media (min-width: 820px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        cursor: auto;
+      }
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <header>
+    <div class="container">
+      <div class="glass nav-shell">
+        <nav>
+          <div class="brand">
+            <div class="brand-mark">SS</div>
+            <div class="brand-text">
+              <strong>Shreyash Singh</strong>
+              <span>BCA Student • Web Learner</span>
+            </div>
+          </div>
+
+          <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home">
+      <div class="container hero-grid">
+        <div class="glass hero-card">
+          <div class="eyebrow">Welcome to my portfolio</div>
+          <h1>Hi, I'm <span class="gradient-text">Shreyash Singh</span></h1>
+          <p>
+            I am a BCA student from Mirzapur who is learning web development, programming basics, SQL, and problem solving. I enjoy building simple and useful projects with clean design while improving my coding skills step by step.
+          </p>
+
+          <div class="hero-highlights">
+            <span>HTML & CSS</span>
+            <span>Python Basics</span>
+            <span>SQL Practice</span>
+            <span>DSA Learning</span>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#skills">Explore Skills</a>
+            <a class="btn btn-secondary" href="#projects">View Projects</a>
+          </div>
+        </div>
+
+        <div class="glass photo-card">
+          <div class="photo-frame">
+  <img src="pic.png" alt="Shreyash Singh">
+</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>About Me</h2>
+          </div>
+          <p>I like learning by building. My focus is on improving coding logic, web design, and practical project development.</p>
+        </div>
+
+        <div class="glass section-card about-grid">
+          <div>
+            <p>
+              I am currently pursuing BCA and exploring core computer subjects with hands-on practice. I enjoy making small websites, dashboards, login pages, and beginner-friendly projects that help me understand real implementation.
+            </p>
+            <p style="margin-top:1rem;">
+              Along with coding, I also like creative work such as merchandise design and visual customization. My goal is to become better at development by combining design sense with programming knowledge.
+            </p>
+          </div>
+
+          <div class="info-list">
+            <div class="info-item"><span>Name</span><strong>Shreyash Singh</strong></div>
+            <div class="info-item"><span>Location</span><strong>Mirzapur, Uttar Pradesh</strong></div>
+            <div class="info-item"><span>Education</span><strong>BCA Student</strong></div>
+            <div class="info-item"><span>Interests</span><strong>Web Dev, Python, SQL, DSA</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Skills</h2>
+          </div>
+          <p>These are the main areas I am learning and improving through regular practice and projects.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="glass skill-box">
+            <h3>Frontend Development</h3>
+            <p>I enjoy creating portfolio pages, login forms, dashboards, and attractive UI layouts.</p>
+            <div class="progress-wrap">
+              <div class="progress-item">
+                <span><strong>HTML</strong><b>85%</b></span>
+                <div class="bar"><div class="fill" style="width:85%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>CSS</strong><b>80%</b></span>
+                <div class="bar"><div class="fill" style="width:80%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>Responsive Design</strong><b>75%</b></span>
+                <div class="bar"><div class="fill" style="width:75%"></div></div>
+              </div>
+            </div>
+            <div class="tag-row" style="margin-top:1rem;">
+              <span class="tag">UI Design</span>
+              <span class="tag">Landing Pages</span>
+              <span class="tag">Glassmorphism</span>
+            </div>
+          </article>
+
+          <article class="glass skill-box">
+            <h3>Programming</h3>
+            <p>I am improving logic through coding practice, mini programs, and problem-solving exercises.</p>
+            <div class="progress-wrap">
+              <div class="progress-item">
+                <span><strong>Python</strong><b>70%</b></span>
+                <div class="bar"><div class="fill" style="width:70%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>Problem Solving</strong><b>68%</b></span>
+                <div class="bar"><div class="fill" style="width:68%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>DSA Basics</strong><b>60%</b></span>
+                <div class="bar"><div class="fill" style="width:60%"></div></div>
+              </div>
+            </div>
+            <div class="tag-row" style="margin-top:1rem;">
+              <span class="tag">Functions</span>
+              <span class="tag">Loops</span>
+              <span class="tag">Logic Building</span>
+            </div>
+          </article>
+
+          <article class="glass skill-box">
+            <h3>Database Skills</h3>
+            <p>I am learning how to work with queries, joins, tables, and database concepts.</p>
+            <div class="progress-wrap">
+              <div class="progress-item">
+                <span><strong>SQL Queries</strong><b>72%</b></span>
+                <div class="bar"><div class="fill" style="width:72%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>Table Design</strong><b>65%</b></span>
+                <div class="bar"><div class="fill" style="width:65%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>Database Concepts</strong><b>62%</b></span>
+                <div class="bar"><div class="fill" style="width:62%"></div></div>
+              </div>
+            </div>
+            <div class="tag-row" style="margin-top:1rem;">
+              <span class="tag">MySQL</span>
+              <span class="tag">Queries</span>
+              <span class="tag">Joins</span>
+            </div>
+          </article>
+
+          <article class="glass skill-box">
+            <h3>Creative & Personal</h3>
+            <p>I also enjoy creative work such as visual styling, merchandise ideas, and layout improvement.</p>
+            <div class="progress-wrap">
+              <div class="progress-item">
+                <span><strong>Design Sense</strong><b>78%</b></span>
+                <div class="bar"><div class="fill" style="width:78%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>Project Presentation</strong><b>73%</b></span>
+                <div class="bar"><div class="fill" style="width:73%"></div></div>
+              </div>
+              <div class="progress-item">
+                <span><strong>Learning Consistency</strong><b>88%</b></span>
+                <div class="bar"><div class="fill" style="width:88%"></div></div>
+              </div>
+            </div>
+            <div class="tag-row" style="margin-top:1rem;">
+              <span class="tag">T-shirt Design</span>
+              <span class="tag">Visual Styling</span>
+              <span class="tag">Creative Ideas</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Projects</h2>
+          </div>
+          <p>These project ideas match the kind of work I like building and learning from.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card glass">
+            <div class="project-top">
+              <div class="project-icon">01</div>
+              <span class="project-status">Practice Project</span>
+            </div>
+            <h3>Hostel Management System</h3>
+            <p>A student-focused system idea for managing hostel details, records, and operations while practicing programming structure.</p>
+            <div class="tag-row" style="margin-top:1rem;">
+              <span class="tag">Project Logic</span>
+              <span class="tag">Student Use Case</span>
+              <span class="tag">Management</span>
+            </div>
+          </article>
+
+          <article class="project-card glass">
+            <div class="project-top">
+              <div class="project-icon">02</div>
+              <span class="project-status">UI Project</span>
+            </div>
+            <h3>Portfolio & Login Pages</h3>
+            <p>Clean interface designs with modern effects such as gradients, glassmorphism, hero sections, and simple layouts.</p>
+            <div class="tag-row" style="margin-top:1rem;">
+              <span class="tag">Frontend</span>
+              <span class="tag">Design</span>
+              <span class="tag">HTML CSS</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="glass section-card" style="text-align:center;">
+          <div class="section-head" style="justify-content:center; text-align:center; margin-bottom:1rem;">
+            <div>
+              <h2>Contact</h2>
+            </div>
+          </div>
+          <p>
+            I am interested in learning, building projects, and improving my development skills. You can add your email and social links here.
+          </p>
+
+          <div class="socials" style="justify-content:center; margin-top:1.2rem;">
+            <a href="shreyashsingh808169@email.com">Email</a>
+            <a href="#">GitHub</a>
+            <a href="linkedin.com/in/shreyash-singh-8a12603b3">LinkedIn</a>
+            <a href="#">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Shreyash Singh • Built with HTML and CSS</div>
+  </footer>
+
+  <script>
+    const cursorDot = document.querySelector(".cursor-dot");
+    const cursorRing = document.querySelector(".cursor-ring");
+    const hoverItems = document.querySelectorAll("a, button, .btn, .tag, .project-card, .skill-box");
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let ringX = 0;
+    let ringY = 0;
+
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      cursorDot.style.left = mouseX + "px";
+      cursorDot.style.top = mouseY + "px";
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+
+      cursorRing.style.left = ringX + "px";
+      cursorRing.style.top = ringY + "px";
+
+      requestAnimationFrame(animateRing);
+    }
+
+    animateRing();
+
+    hoverItems.forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        cursorRing.classList.add("active");
+      });
+
+      item.addEventListener("mouseleave", () => {
+        cursorRing.classList.remove("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
